@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
-
+//功能文件
 export const isFalsy = (value: unknown): boolean => value === 0 ? false : !value
+//删除对象中的空值
 export const clearObject = (object: any) => {
   let result: any = { ...object }
   Object.keys(object).forEach((key: any) => {
@@ -12,6 +13,7 @@ export const clearObject = (object: any) => {
   return result
 }
 
+//防抖
 export const useDebounce = <V>(value: V, delay: number) => {
   const [debounceValue, setDebounceValue] = useState(value)
   useEffect(() => {
@@ -23,13 +25,14 @@ export const useDebounce = <V>(value: V, delay: number) => {
   return debounceValue
 }
 
+//自定义hook useEffect组件加载时
 export const useMount = (callback: () => void) => {
   useEffect(() => {
     callback()
   }, [])
 }
 
-
+//自定义hook 清空，删减，增加数组
 export const useArray = <T>(persons: T[]) => {
   const [value, setValue] = useState(persons)
   return {

@@ -10,6 +10,8 @@ interface ListProps{
   users:User[],
   list:Project[]
 }
+
+//控制版面 表格
 export const List = ({ users, list }:ListProps) => {
   return <table>
     <thead>

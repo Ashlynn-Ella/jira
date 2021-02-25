@@ -1,7 +1,8 @@
 
 export interface User {
   id: string,
-  name: string
+  name: string,
+  token:string
 }
 interface SearchPanelProps {
   users: User[],
@@ -11,6 +12,8 @@ interface SearchPanelProps {
   },
   setParam: (param: SearchPanelProps['param']) => void
 }
+
+//搜索
 export const SearchPanel = ({ users, param, setParam }: SearchPanelProps) => {
   return <form>
     <input type="text" onChange={(e) => {
@@ -18,7 +21,6 @@ export const SearchPanel = ({ users, param, setParam }: SearchPanelProps) => {
         ...param,
         name: e.target.value
       })
-
     }} />
     <select onChange={(e) => {
       setParam({
