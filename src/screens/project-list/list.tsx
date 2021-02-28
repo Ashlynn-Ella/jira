@@ -1,32 +1,33 @@
 import { User } from "./search-panel"
-interface Project{
-  id:string,
-  name:string,
-  personId:string,
-  organization:string,
-  created:string
+import { Table } from 'antd'
+interface Project {
+  id: string,
+  name: string,
+  personId: string,
+  organization: string,
+  created: string
 }
-interface ListProps{
-  users:User[],
-  list:Project[]
+interface ListProps {
+  users: User[],
+  list: Project[]
 }
 
 //控制版面 表格
-export const List = ({ users, list }:ListProps) => {
-  return <table>
-    <thead>
-      <tr>
-        <th>名称</th>
-        <th>负责人</th>
-      </tr>
-    </thead>
-    <tbody>
-      {
-        list.map(project => <tr key={project.id}>
-          <td>{project.name}</td>
-          <td>{users.find(user=>user.id === project.personId)?.name ||'未知'}</td>
-        </tr>)
+export const List = ({ users, list }: ListProps) => {
+  return <Table pagination={false} dataSource={list} columns={
+    [{
+      title: '名称',
+      dataIndex: 'name',
+      sorter:(a,b)=> a.name.localeCompare(b.name)
+    },
+    {
+      title: '负责人',
+      render(value, project) {
+        return <span>
+          {users.find(user => user.id === project.personId)?.name || '未知'}
+        </span>
       }
-    </tbody>
-  </table>
+    }]
+  }>
+  </Table>
 }
